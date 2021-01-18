@@ -13,8 +13,8 @@ const MyFlatList = ({ array, textColor, isBold }) => {
       <View style={{paddingTop : 40, width: '100%'}}>
       <FlatList
         data={array}
-        renderItem={({item,index}) =><ItemComponent id = {item.id} title = {item.title} note = {item.note} tag = {item.tag} textColor={textColor} isBold = {isBold} />}
-       
+        renderItem={({item}) =><ItemComponent id = {item.id} title = {item.title} note = {item.note} tag = {item.tag} textColor={textColor} isBold = {isBold} />}
+       keyExtractor = {(item) => item.id.toString()}
      />
     </View>
 
@@ -24,16 +24,10 @@ const MyFlatList = ({ array, textColor, isBold }) => {
 const ItemComponent = ({id, title, note, tag, textColor, isBold}) => {
 
   return (
- <View  style={{
-  width: '100%',
-  flex: 0.5,
-  justifyContent: 'center',
-  alignItems: 'center',
 
-}}>
   <Text style= {{ textAlign: 'center', color: textColor, fontWeight: isBold? 'bold':'normal' }}>
     {id.toString()} {title} {note} {tag}</Text>
-    </View>
+  
     )
 }
     
@@ -60,7 +54,7 @@ const ItemComponent = ({id, title, note, tag, textColor, isBold}) => {
    */
 
 
-const Inputs = ({ array, setArray, count, setCount}) => {
+const Inputs = ({ array, setArray}) => {
 
   const [note, setNote] = useState({})
   
@@ -86,8 +80,7 @@ const Inputs = ({ array, setArray, count, setCount}) => {
       <Button title="Save Note"
         onPress={
           () => 
-          {setCount((prevCount) => prevCount +1); 
-           note.id = count; setArray([...array, note]) }} />
+          { note.id = array.length+1; setArray([...array, note]) }} />
     </View>
   );
 }
@@ -100,17 +93,17 @@ export default function App() {
     {id: 2, title: 'restaurant', note: 'Jakob var här idag', tag: 'Älvsjö'  },
     {id: 3, title: 'restaurant', note: 'Janne var här idag', tag: 'Stockholm'  },
   ];
-  const [count, setCount] = useState(4)
+  
   const [array, setArray] = useState(theArray)
   const [textColor, setTextColor] = useState('black')
   const [isBold, setIsBold] = useState('true')
   return (
     <View style={styles.mainContainer}>
 
-        <TheTopPart array={array} setArray={setArray} textColor={textColor} setCount = {setCount} count= {count}
+        <TheTopPart array={array} setArray={setArray} textColor={textColor} 
       setTextColor={setTextColor} setIsBold = {setIsBold} isBold = {isBold}
       />
-      <Inputs array={array} setArray={setArray} setCount = {setCount} count = {count}/>
+      <Inputs array={array} setArray={setArray}/>
       <MyFlatList array={array} textColor={textColor} isBold = {isBold} /> 
       
    
