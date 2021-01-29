@@ -8,7 +8,7 @@ export function IndividualNote({route}) {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.noteContainer}>
-        <Text style ={{padding: 5, color: fontcolor, fontSize: fontsize}}>In the individual component  {note} </Text>
+        <Text style ={{padding: 5, color: fontcolor, fontSize: fontsize}}>  {note} </Text>
         </View>
       </View>
     )
