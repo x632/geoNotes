@@ -16,7 +16,7 @@ export function AddNote({route}) {
   const styles = StyleSheet.create({
     mainContainer: {
       flex: 1.0,
-      backgroundColor: '#fff',
+      backgroundColor: '#3a5f3a',
       //alignItems: 'center',
       //justifyContent: 'center',
     },

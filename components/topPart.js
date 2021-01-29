@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { StyleSheet, View, Button, TouchableHighlight, Text } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
-import {ArrayContext} from '../context/ArrayHandelingContext'
+import {ArrayContext} from '../context/ArrayContext'
 
 
 export function TheTopPart() {
@@ -37,7 +37,7 @@ export function TheTopPart() {
         <TouchableHighlight onPress={() => {
             setArray(array.slice(0, array.length - 1));
           }}>
-           <View style = {{...button.button, width : 130, height : 40, margin:5}}>
+           <View style = {{...button.button, width : 140, height : 40, margin:5}}>
               <Text style = {{color: 'white', fontSize: 13}}>DELETE LAST ITEM</Text>
            </View>
         </TouchableHighlight>
@@ -77,12 +77,13 @@ const toppart = StyleSheet.create({
   },
 });
 
-
 const button = StyleSheet.create({
   button: {
-    backgroundColor: "#302e03",
-    paddingTop: 10,
-
-    alignItems: 'center'
+    backgroundColor: '#302e03',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 1,
+    justifyContent: 'center',
   }
 });

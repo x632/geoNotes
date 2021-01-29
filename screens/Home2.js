@@ -1,9 +1,10 @@
+  
 import { StyleSheet, View } from 'react-native';
 import {TheTopPart} from '../components/topPart.js';
 import {MyFlatList} from '../components/flatList.js';
 import {Inputs} from '../components/inputs.js';
 import React, { useState, createContext } from "react";
-import {ArrayContext} from '../context/ArrayHandelingContext';
+import {ArrayContext} from '../context/ArrayContext';
 
 export default function Home2() {
     
@@ -35,7 +36,3 @@ export default function Home2() {
       //justifyContent: 'center',
     },
   });
-
-
-/* array={array} setArray={setArray} textColor={textColor} 
-        setTextColor={setTextColor} setIsBold = {setIsBold} isBold = {isBold} */
