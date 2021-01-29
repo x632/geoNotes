@@ -56,7 +56,7 @@ export function Inputs ({ array,updateArray}) {
           db.collection("users").doc(user.uid).collection("notes").add({
             note: note.note,
             title: note.title,
-            date: dat,
+            date: today,
             time: tim,
             id: id,
             fontsize: selectedValue,

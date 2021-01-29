@@ -12,14 +12,22 @@ export function MyFlatList () {
   const {array,isBold,textColor, setArray} = useContext(ArrayContext) 
   const {user}= useContext(AuthContext);
   let noteArray = [];
+  let idArray =[];
   useEffect(() => {
-    db.collection("users").doc(user.uid).collection("notes").orderBy("id", "asc").get()
+    db.collection("users").doc(user.uid).collection("notes").orderBy("date", "asc").get()
   .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           let note = doc.data();
           console.log("this should be the entire note: ", note);
+          idArray.push(doc.id);
+          let timestamp = note.date;
+          let newTime = `${timestamp.toDate()}`;
+          let lastTime = newTime.slice(0,10);
+          note = {...note,date : lastTime};
           noteArray.push(note)
+          
       });
+      console.log('detta är id arrayn: ', idArray)
      setArray(noteArray);
   }) 
   .catch(function(error) {
@@ -28,7 +36,7 @@ export function MyFlatList () {
 }, [])
 
     return (
-      <View style={{ width: '93%', flex: 0.85, borderColor : '#192e19', borderWidth: 4}}>
+      <View style={{ width: '93%', flex: 0.85, borderColor : '#192e19', borderRadius:5, borderWidth: 4}}>
       <FlatList
         data={array}
         renderItem={({item}) =><ItemComponent id = {item.id} title = {item.title} note = {item.note} date = {item.date} time = {item.time} fontcolor={item.fontcolor} fontsize = {item.fontsize} />}

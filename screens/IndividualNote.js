@@ -7,7 +7,9 @@ export function IndividualNote({route}) {
     //const {array,isBold,textColor} = useContext(ArrayContext) 
     return (
       <View style={styles.mainContainer}>
-        <Text style ={{color: fontcolor, fontSize: fontsize}}>In the individual component {id} {title} {note} {date}, {time}</Text>
+        <View style={styles.noteContainer}>
+        <Text style ={{padding: 5, color: fontcolor, fontSize: fontsize}}>In the individual component  {note} </Text>
+        </View>
       </View>
     )
   };
@@ -15,8 +17,16 @@ export function IndividualNote({route}) {
   const styles = StyleSheet.create({
     mainContainer: {
       flex: 1.0,
-      backgroundColor: 'green',
-      //alignItems: 'center',
-      //justifyContent: 'center',
+      backgroundColor: '#3a5f33',
+      alignItems: 'center',
     },
+    noteContainer:{
+      width: '95%', 
+      flex: 0.85, 
+      borderColor : '#192e19', 
+      borderRadius:5, 
+      borderWidth: 4,
+      backgroundColor: '#afc5a0',
+      marginTop: 10,
+    }
 });
