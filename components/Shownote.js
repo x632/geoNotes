@@ -1,8 +1,29 @@
 import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
+import {ArrayContext} from '../context/ArrayContext';
+import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
+import { db } from "../firebase";
 
 
 export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
+
+  const navigation = useNavigation();
+  const { array,setArray } = useContext(ArrayContext);
+  const { user } = useContext(AuthContext);
+
+  const deleteNote = (docRef) => {
+    var theDoc = db.collection("users").doc(user.uid).collection("notes").doc(docRef)
+
+    theDoc.delete().
+    then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+  };
+
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.noteContainer}>
@@ -11,7 +32,17 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
         </Text>
       </View>
       <View style={{ flex: 0.15, justifyContent: "center" }}>
-        <TouchableHighlight>
+        <TouchableHighlight onPress= {() => {
+          deleteNote(id);
+          console.log('ID = ',id);
+
+          let tempArray = array.filter(note => note.id != id);
+          console.log(tempArray);
+          setArray(tempArray);
+          navigation.navigate("Home2");
+          }
+        }
+        >
           <View style={{ ...button.button, width: 130, height: 40 }}>
             <Text style={{ color: "white", fontSize: 13 }}>DELETE NOTE</Text>
           </View>

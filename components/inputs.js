@@ -22,17 +22,23 @@ export function Inputs() {
   const [selectedValue, setSelectedValue] = useState(15);
   const [selectedColor, setSelectedColor] = useState("black");
 
-  const logIn = async (email, password) => {
-    console.log("calling log in");
+  const addId = (docRef) => {
+    var theDoc = db.collection("users").doc(user.uid).collection("notes").doc(docRef)
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      console.log("log in ");
-      setIsLoggedIn(true);
-    } catch (error) {
-      console.log("Error: ", error);
-    }
+    
+    return theDoc.update({
+        id: docRef
+    })
+    .then(function() {
+        console.log("Document successfully updated with new id!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
   };
+
+
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -78,22 +84,11 @@ export function Inputs() {
         <TouchableHighlight
           onPress={() => {
             let today = new Date();
-            let dat =
-              today.getFullYear() +
-              "-" +
-              (today.getMonth() + 1) +
-              "-" +
-              today.getDate();
-            let tim =
-              today.getHours() +
-              ":" +
-              today.getMinutes() +
-              ":" +
-              today.getSeconds();
+            let dat = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+            let tim = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             let id = array.length + 1;
 
-            setArray([
-              ...array,
+            setArray([...array,
               {
                 ...note,
                 id: array.length + 1,
@@ -104,12 +99,12 @@ export function Inputs() {
               },
             ]);
             console.log("här är user uid:", user.uid);
-
+            
             db.collection("users")
               .doc(user.uid)
               .collection("notes")
               .add({
-                note: note.title,
+                note: note.note,
                 title: note.title,
                 date: today,
                 time: tim,
@@ -119,6 +114,8 @@ export function Inputs() {
               })
               .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
+                addId(docRef.id);
+
               })
               .catch(function (error) {
                 console.error("Error adding document: ", error);
