@@ -15,9 +15,9 @@ export default function AuthenticatedStack() {
       headerStyle: {backgroundColor: '#837f20'} 
       }}/>
       <Stack.Screen name="Add note" component={AddNote}
-      options={({ route }) => ({ title: route.params.title,
+      options={{title: 'Add note',
         headerStyle: {backgroundColor: '#837f20'} 
-      })}
+      }}
       />
        <Stack.Screen name="Individual Note" component={IndividualNote}
       options={({ route }) => ({ title: route.params.title,

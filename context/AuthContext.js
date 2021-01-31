@@ -23,7 +23,8 @@ export default function AuthContextProvider({children}){
 
        try{ 
         await auth.signInWithEmailAndPassword(email, password);
-            console.log("log in ");     
+            console.log("log in ");   
+            setErrorMessage('');  
         } catch (error) {
             setErrorMessage(`${error}`);
             console.log('my error:', error)
@@ -33,6 +34,7 @@ export default function AuthContextProvider({children}){
     const signOut = async () => {
         try{
             await auth.signOut();
+            setErrorMessage('');
             console.log("You are signed out")
         } catch (error) {
             setErrorMessage(`${error}`);
@@ -42,8 +44,10 @@ export default function AuthContextProvider({children}){
 
     const createUser = async (email,password) => {
         console.log("Calling createuser");
+        setErrorMessage('');
         try{ 
            await auth.createUserWithEmailAndPassword(email, password);
+           setErrorMessage('');
             console.log("Created user" );
         } catch (error){
             setErrorMessage(`${error}`);
@@ -52,7 +56,7 @@ export default function AuthContextProvider({children}){
     }
     
     return (
-        <AuthContext.Provider value={{user, logIn, signOut, createUser, isLoading, errorMessage}}>
+        <AuthContext.Provider value={{user, logIn, signOut, createUser, isLoading, errorMessage, setErrorMessage}}>
             {children}
         </AuthContext.Provider>
     );

@@ -9,7 +9,7 @@ import { AuthContext} from '../context/AuthContext';
 
 export function MyFlatList () {
 
-  const {array,isBold,textColor, setArray} = useContext(ArrayContext) 
+  const {array, setArray} = useContext(ArrayContext) 
   const {user}= useContext(AuthContext);
   let noteArray = [];
   let idArray =[];

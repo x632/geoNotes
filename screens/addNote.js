@@ -1,14 +1,15 @@
 import {Inputs} from '../components/inputs.js';
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {View, TextInput, Button, StyleSheet} from "react-native";
-
+import {ArrayContext} from '../context/ArrayContext';
 
 export function AddNote({route}) {
-    const {array,setArray} = route.params;
-   
+    
+   const{array, setArray} = useContext(ArrayContext);
+  
     return (
       <View style={styles.mainContainer}>
-        <Inputs array={array} updateArray={setArray}/> 
+        <Inputs /> 
       </View>
     )
   };

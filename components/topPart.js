@@ -3,13 +3,13 @@ import React, { useState, useContext } from "react";
 import { StyleSheet, View, Button, TouchableHighlight, Text } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
-import {ArrayContext} from '../context/ArrayContext'
+import {ArrayContext} from '../context/ArrayContext';
 
 
 export function TheTopPart() {
   
   const navigation = useNavigation();
-  const {array,setArray,setTextColor,setIsBold,isBold} = useContext(ArrayContext)
+  const {array,setArray} = useContext(ArrayContext)
   const {setIsLoggedIn, signOut} = useContext(AuthContext)
   const submit = () => {
     //setIsLoggedIn(false)
@@ -42,7 +42,7 @@ export function TheTopPart() {
            </View>
         </TouchableHighlight>
         
-        <TouchableHighlight onPress={()  => navigation.navigate('Add note', {array, setArray})}>
+        <TouchableHighlight onPress={()  => navigation.navigate('Add note'/* , {array, setArray} */)}>
            <View style = {{...button.button, width : 110, height : 40}}>
               <Text style = {{color: 'white', fontSize: 13}}>ADD NOTE</Text>
            </View>

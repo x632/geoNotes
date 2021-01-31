@@ -1,16 +1,15 @@
 import React, { useState, useContext } from "react";
-import {View, TextInput, Button, StyleSheet,Text} from "react-native";
+import {View, TextInput, Button, StyleSheet,Text, TouchableHighlight} from "react-native";
 import {ArrayContext} from './Home2'
+import {ShowNote} from '../components/Shownote'
 
 export function IndividualNote({route}) {
     const {id, title,note,date,time,fontsize,fontcolor} = route.params;
     //const {array,isBold,textColor} = useContext(ArrayContext) 
     return (
       <View style={styles.mainContainer}>
-        <View style={styles.noteContainer}>
-        <Text style ={{padding: 5, color: fontcolor, fontSize: fontsize}}>  {note} </Text>
-        </View>
-      </View>
+        <ShowNote note={note} fontsize={fontsize} fontcolor= {fontcolor} />
+      </View> 
     )
   };
 
@@ -29,4 +28,15 @@ export function IndividualNote({route}) {
       backgroundColor: '#afc5a0',
       marginTop: 10,
     }
+});
+const button = StyleSheet.create({
+  button: {
+    backgroundColor: '#302e03',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 1,
+    justifyContent: 'center',
+
+  }
 });

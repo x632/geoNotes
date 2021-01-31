@@ -8,19 +8,19 @@ export default function LogIn({ navigation}) {
   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage]= useState('');
-    const {logIn, createUser,errorMessage} = useContext(AuthContext)
+    //const [message, setMessage]= useState('');
+    const {logIn, createUser,errorMessage, setErrorMessage} = useContext(AuthContext)
 
 
-    useEffect(() => {
+    /* useEffect(() => {
       setMessage(errorMessage)
-    }, [errorMessage]);
+    }, [errorMessage]); */
     
     const submit = () => {
         // navigation.navigate('Home');
         //setIsLoggedIn(true);[}]
         if (email===""|| password ===""){
-          setMessage("Error: No fields can be empty")
+          setErrorMessage("Error: No fields can be empty")
         }else{
           logIn(email, password)
         console.log("submitting login");
@@ -29,7 +29,7 @@ export default function LogIn({ navigation}) {
     const register = () =>{
         console.log("submitting register");
         if (email===""|| password ===""){
-          setMessage("Error: No fields can be empty")
+          setErrorMessage("Error: No fields can be empty")
         }else{
           createUser(email, password);
         console.log("submitting login");
@@ -69,7 +69,7 @@ export default function LogIn({ navigation}) {
 
           <View style = {styles.new}>
             <View style= {{height:30}}>
-               <Text style = {{color: 'red',fontSize:18}}> {message} </Text> 
+               <Text style = {{color: 'red',fontSize:15}}> {errorMessage} </Text> 
 
             </View>
             <TouchableHighlight onPress = {register}>
