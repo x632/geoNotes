@@ -7,6 +7,7 @@ export default function AuthContextProvider({children}){
 
     const [isLoading, setIsLoading]=useState(true);
     const [user, setUser] = useState();
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -24,7 +25,8 @@ export default function AuthContextProvider({children}){
         await auth.signInWithEmailAndPassword(email, password);
             console.log("log in ");     
         } catch (error) {
-            console.log("Error: ",error);
+            setErrorMessage(`${error}`);
+            console.log('my error:', error)
         }
     };
 
@@ -33,7 +35,8 @@ export default function AuthContextProvider({children}){
             await auth.signOut();
             console.log("You are signed out")
         } catch (error) {
-            console.log("error", error)
+            setErrorMessage(`${error}`);
+            console.log('my error:', error)
         }
     };
 
@@ -43,12 +46,13 @@ export default function AuthContextProvider({children}){
            await auth.createUserWithEmailAndPassword(email, password);
             console.log("Created user" );
         } catch (error){
-            console.log("error :",error)
+            setErrorMessage(`${error}`);
+            console.log('my error:', error)
         }
     }
     
     return (
-        <AuthContext.Provider value={{user, logIn, signOut, createUser, isLoading}}>
+        <AuthContext.Provider value={{user, logIn, signOut, createUser, isLoading, errorMessage}}>
             {children}
         </AuthContext.Provider>
     );

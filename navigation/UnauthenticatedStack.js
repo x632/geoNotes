@@ -14,7 +14,6 @@ export default function UnauthenticatedStack() {
          headerStyle: {backgroundColor: '#837f20'} 
         }}
         />
-
     </Stack.Navigator>
     );
 }

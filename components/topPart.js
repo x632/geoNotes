@@ -29,7 +29,7 @@ export function TheTopPart() {
 
       <View style={toppart.part}>
         <TouchableHighlight onPress = {submit}>
-           <View style = {{...button.button, width : 100, height : 40, margin:5}}>
+           <View style = {{...button.button, width : 100, height : 40}}>
               <Text style = {{color: 'white', fontSize: 13}}>SIGN OUT</Text>
            </View>
         </TouchableHighlight>
@@ -37,13 +37,13 @@ export function TheTopPart() {
         <TouchableHighlight onPress={() => {
             setArray(array.slice(0, array.length - 1));
           }}>
-           <View style = {{...button.button, width : 140, height : 40, margin:5}}>
+           <View style = {{...button.button, width : 140, height : 40}}>
               <Text style = {{color: 'white', fontSize: 13}}>DELETE LAST ITEM</Text>
            </View>
         </TouchableHighlight>
         
         <TouchableHighlight onPress={()  => navigation.navigate('Add note', {array, setArray})}>
-           <View style = {{...button.button, width : 110, height : 40, margin:5}}>
+           <View style = {{...button.button, width : 110, height : 40}}>
               <Text style = {{color: 'white', fontSize: 13}}>ADD NOTE</Text>
            </View>
         </TouchableHighlight>

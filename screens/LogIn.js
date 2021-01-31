@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput,TouchableHighlight,ImageBackground } from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import backgroundPic from '../assets/backgroundPic.jpg'
@@ -8,18 +8,32 @@ export default function LogIn({ navigation}) {
   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage]= useState('');
+    const {logIn, createUser,errorMessage} = useContext(AuthContext)
 
-    const {logIn, createUser} = useContext(AuthContext)
 
+    useEffect(() => {
+      setMessage(errorMessage)
+    }, [errorMessage]);
+    
     const submit = () => {
         // navigation.navigate('Home');
-        //setIsLoggedIn(true);
+        //setIsLoggedIn(true);[}]
+        if (email===""|| password ===""){
+          setMessage("Error: No fields can be empty")
+        }else{
+          logIn(email, password)
         console.log("submitting login");
-        logIn(email, password);
+      }
     };
     const register = () =>{
         console.log("submitting register");
-        createUser(email, password);
+        if (email===""|| password ===""){
+          setMessage("Error: No fields can be empty")
+        }else{
+          createUser(email, password);
+        console.log("submitting login");
+        }
     }
   
   
@@ -52,7 +66,12 @@ export default function LogIn({ navigation}) {
             </View>
             </ImageBackground>
 
+
           <View style = {styles.new}>
+            <View style= {{height:30}}>
+               <Text style = {{color: 'red',fontSize:18}}> {message} </Text> 
+
+            </View>
             <TouchableHighlight onPress = {register}>
               <View style = {{...button.button, width : 200, height : 40}}>
                 <Text style = {{color: 'white'}}>REGISTER</Text>
