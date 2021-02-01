@@ -96,7 +96,6 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
             deleteNote();
 
             let tempArray = array.filter((note) => note.id != id);
-            console.log(tempArray);
             setArray(tempArray);
             navigation.navigate("Home2");
           }}

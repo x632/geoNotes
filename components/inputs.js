@@ -1,4 +1,3 @@
-  
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useContext } from "react";
 import {
@@ -21,16 +20,30 @@ export function Inputs() {
   const navigation = useNavigation();
   const [selectedValue, setSelectedValue] = useState(15);
   const [selectedColor, setSelectedColor] = useState("black");
+  
+  
+  const addUid = (docRef) =>{
+/*     let tempArray = [...array];
+    console.log(tempArray,'docRef:',docRef);
+   let a = tempArray.length;
+   console.log('Length of array: ',tempArray.length)
+   tempArray[a-1].id = docRef;
+   console.log(tempArray);
+   setArray(tempArray);  */
+   navigation.navigate("Home2");
+  }
+
+
 
   const addId = (docRef) => {
-    var theDoc = db.collection("users").doc(user.uid).collection("notes").doc(docRef)
-
-    
+    console.log( 'Id:t innan :',docRef)
+    let theDoc = db.collection("users").doc(user.uid).collection("notes").doc(docRef)
     return theDoc.update({
         id: docRef
     })
     .then(function() {
-        console.log("Document successfully updated with new id!");
+        console.log("Document successfully updated with new id! ID =", docRef);
+        addUid(docRef);
     })
     .catch(function(error) {
         // The document probably doesn't exist.
@@ -120,7 +133,7 @@ export function Inputs() {
               .catch(function (error) {
                 console.error("Error adding document: ", error);
               });
-            navigation.navigate("Home2");
+            // navigation.navigate("Home2");
           }}
         >
           <View style={{ ...button.button, width: 160, height: 50 }}>
