@@ -46,6 +46,7 @@ export default function LogIn({ navigation}) {
               <TextInput
               placeholder="Enter email"
               value={email}
+              keyboardType= 'email-address'
               onChangeText={setEmail}
               style={{
               marginTop: 40,
@@ -59,7 +60,9 @@ export default function LogIn({ navigation}) {
               <TextInput
                 placeholder="Enter password"
                 value={password}
+                secureTextEntry={true}
                 onChangeText={setPassword}
+
                 style={{ backgroundColor: '#e4ece4', padding: 10, borderRadius: 5, marginTop:20, borderWidth: 2 }}
               />
          
