@@ -26,8 +26,6 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
         return true;
       }
     });
-    console.log(' detta är indexet från get uid ',ind)
-    console.log('uidarrayns id:', uidArray[ind])
     //add firestore id to note
     let tempArray = [...array];
     tempArray[ind].id = uidArray[ind]
@@ -78,7 +76,7 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
     <View style={styles.mainContainer}>
       <View style={{...styles.noteContainer}}>
         <TextInput
-          style={{ fontSize: fontsize, color: fontcolor }}
+          style={{ fontSize: fontsize, color: fontcolor, padding:10 }}
           onChangeText={(text) => setTextInputValue(text)}
           value={textInputValue}
           multiline={true}
