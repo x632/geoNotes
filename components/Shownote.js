@@ -10,52 +10,59 @@ import { ArrayContext } from "../context/ArrayContext";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
   const navigation = useNavigation();
-  const { array, setArray, setNote } = useContext(ArrayContext);
+  const { array, setArray, setNote,uidArray,setUidArray } = useContext(ArrayContext);
   const { user } = useContext(AuthContext);
   const [textInputValue, setTextInputValue] = useState(note);
 
-  const updateArray = () => {
-    console.log("id :", id);
+
+  const getUid = () => {
+    // get the (firestore)id, update array with id and note.
     let ind = array.findIndex(function (post) {
-      if (post.id === id) {
+      if (post.time === time && post.date === date) {
         return true;
       }
     });
+    console.log(' detta är indexet från get uid ',ind)
+    console.log('uidarrayns id:', uidArray[ind])
+    //add firestore id to note
     let tempArray = [...array];
+    tempArray[ind].id = uidArray[ind]
     tempArray[ind].note = note;
+    let newId = uidArray[ind]
     setArray(tempArray);
+    
+    return newId;
   };
 
-  const updateNote = (id) => {
-    console.log(" Det viktiga id:t är ", id);
+    const updateOnFirestore = (newId) =>{
     var theDoc = db
       .collection("users")
       .doc(user.uid)
       .collection("notes")
-      .doc(id);
+      .doc(newId);
     return theDoc
       .update({
         note: note,
       })
       .then(function () {
         console.log("Successfully updated note");
-        updateArray();
       })
       .catch(function (error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
       });
   };
-
-  const deleteNote = () => {
+  
+  const deleteFromFirestore = (newId) => {
     var theDoc = db
       .collection("users")
       .doc(user.uid)
       .collection("notes")
-      .doc(id);
+      .doc(newId);
 
     theDoc
       .delete()
@@ -81,11 +88,12 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
         <TouchableHighlight
           onPress={() => {
             note = textInputValue;
-            updateNote(id);
+            let newestId = getUid();
+            updateOnFirestore(newestId)
             navigation.navigate("Home2");
           }}
         >
-          <View style={{ ...button.button, width: 130, height: 40 }}>
+          <View style={{ ...button.button, width: 145, height: 40 }}>
             <Text style={{ color: "white", fontSize: 13 }}>
               SAVE EDITED NOTE
             </Text>
@@ -93,14 +101,16 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => {
-            deleteNote();
-
-            let tempArray = array.filter((note) => note.id != id);
+            let newId = getUid();
+            deleteFromFirestore(newId);
+            let tempArray = array.filter((note) => note.id != newId);
             setArray(tempArray);
+            let tempUidArray = uidArray.filter((uidpost) => uidpost != newId);
+            setUidArray(tempUidArray);
             navigation.navigate("Home2");
           }}
         >
-          <View style={{ ...button.button, width: 130, height: 40 }}>
+          <View style={{ ...button.button, width: 145, height: 40 }}>
             <Text style={{ color: "white", fontSize: 13 }}>DELETE NOTE</Text>
           </View>
         </TouchableHighlight>

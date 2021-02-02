@@ -15,35 +15,24 @@ import {ArrayContext } from "../context/ArrayContext";
 
 export function Inputs() {
   const { user } = useContext(AuthContext);
-  const {array,setArray } = useContext(ArrayContext);
+  const {array,setArray, uidArray,setUidArray } = useContext(ArrayContext);
   const [note, setNote] = useState({});
   const navigation = useNavigation();
   const [selectedValue, setSelectedValue] = useState(15);
   const [selectedColor, setSelectedColor] = useState("black");
-  
-  
-  const addUid = (docRef) =>{
-/*     let tempArray = [...array];
-    console.log(tempArray,'docRef:',docRef);
-   let a = tempArray.length;
-   console.log('Length of array: ',tempArray.length)
-   tempArray[a-1].id = docRef;
-   console.log(tempArray);
-   setArray(tempArray);  */
-   navigation.navigate("Home2");
-  }
-
-
 
   const addId = (docRef) => {
-    console.log( 'Id:t innan :',docRef)
-    let theDoc = db.collection("users").doc(user.uid).collection("notes").doc(docRef)
+    var theDoc = db.collection("users").doc(user.uid).collection("notes").doc(docRef)
+
+    
     return theDoc.update({
         id: docRef
     })
     .then(function() {
-        console.log("Document successfully updated with new id! ID =", docRef);
-        addUid(docRef);
+        console.log("Document successfully updated with new id! ID= ",docRef);
+        let temArray = [...uidArray, docRef];
+        setUidArray(temArray);
+        console.log('Från inputs uidarrayn är:', uidArray);
     })
     .catch(function(error) {
         // The document probably doesn't exist.
@@ -133,7 +122,7 @@ export function Inputs() {
               .catch(function (error) {
                 console.error("Error adding document: ", error);
               });
-            // navigation.navigate("Home2");
+            navigation.navigate("Home2");
           }}
         >
           <View style={{ ...button.button, width: 160, height: 50 }}>

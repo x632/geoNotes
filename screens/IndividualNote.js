@@ -1,3 +1,4 @@
+  
 import React, { useState, useContext } from "react";
 import {View, TextInput, Button, StyleSheet,Text, TouchableHighlight} from "react-native";
 import {ArrayContext} from '../context/ArrayContext';
@@ -8,7 +9,7 @@ export function IndividualNote({route}) {
     const {array, setArray} = useContext(ArrayContext) 
     return (
       <View style={styles.mainContainer}>
-        <ShowNote note={note} fontsize={fontsize} fontcolor= {fontcolor} id ={id}/>
+        <ShowNote note={note} fontsize={fontsize} fontcolor= {fontcolor} id ={id} title={title} time={time} date={date}/>
       </View> 
     )
   };

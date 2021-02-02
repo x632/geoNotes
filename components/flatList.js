@@ -9,7 +9,7 @@ import { AuthContext} from '../context/AuthContext';
 
 export function MyFlatList () {
 
-  const {array, setArray} = useContext(ArrayContext) 
+  const {array, setArray,uidArray,setUidArray} = useContext(ArrayContext) 
   const {user}= useContext(AuthContext);
   let noteArray = [];
   let idArray =[];
@@ -29,6 +29,7 @@ export function MyFlatList () {
       });
       console.log('detta är id arrayn: ', idArray)
      setArray(noteArray);
+     setUidArray(idArray);
   }) 
   .catch(function(error) {
       console.log("Error getting documents: ", error);
