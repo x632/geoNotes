@@ -39,19 +39,6 @@ export function TheTopPart() {
               <Text style = {{color: 'white', fontSize: 13}}>ADD NOTE</Text>
            </View>
         </TouchableHighlight>
-
-        {/* <Button
-          title="Add note"
-          onPress={() => navigation.navigate('Add note', {array, setArray})}
-             setArray([...array,
-              {id: array.length + 1,
-                title: "restaurant",
-                note: "jag var här idag",
-                tag: "Huddinge"
-              },
-            ]); 
-          }}
-        /> */}
       </View>
     </View>
   );

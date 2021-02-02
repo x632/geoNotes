@@ -32,7 +32,7 @@ export function Inputs() {
         console.log("Document successfully updated with new id! ID= ",docRef);
         let temArray = [...uidArray, docRef];
         setUidArray(temArray);
-        console.log('Från inputs uidarrayn är:', uidArray);
+        console.log(docRef, "- id added to uid list");
     })
     .catch(function(error) {
         // The document probably doesn't exist.

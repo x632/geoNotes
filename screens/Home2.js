@@ -5,7 +5,6 @@ import React, { useState, createContext, useContext } from "react";
 import { ArrayContext } from "../context/ArrayContext";
 
 export default function Home2() {
-  //  const {array, setArray} = useContext(ArrayContext);
 
   return (
     <View style={styles.mainContainer}>
@@ -20,6 +19,5 @@ const styles = StyleSheet.create({
     flex: 1.0,
     backgroundColor: "#3a5f3a",
     alignItems: "center",
-    //justifyContent: 'center',
   },
 });
