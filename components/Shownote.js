@@ -1,74 +1,73 @@
-import React, { useState, useContext } from "react";
+/* eslint-disable prettier/prettier */
+import React, { useState, useContext } from 'react';
 import {
   View,
   StyleSheet,
   Text,
   TouchableHighlight,
   TextInput,
-} from "react-native";
-import { ArrayContext } from "../context/ArrayContext";
-import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../context/AuthContext";
-import { db } from "../firebase";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+} from 'react-native';
+import { ArrayContext } from '../context/ArrayContext';
+import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../context/AuthContext';
+import { db } from '../firebase';
 
 export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
   const navigation = useNavigation();
-  const { array, setArray, setNote,uidArray,setUidArray } = useContext(ArrayContext);
+  const { array, setArray, uidArray, setUidArray } = useContext(
+    ArrayContext
+  );
   const { user } = useContext(AuthContext);
   const [textInputValue, setTextInputValue] = useState(note);
 
 
   const getUid = () => {
-    // get the (firestore)id, update array with id and note.
+    // get the (firestore)id and add it (also) to note (needed for new notes that haven't
+    // been downloaded from firestore)
     let ind = array.findIndex(function (post) {
       if (post.time === time && post.date === date) {
         return true;
       }
     });
-    //add firestore id to note
     let tempArray = [...array];
-    tempArray[ind].id = uidArray[ind]
+    tempArray[ind].id = uidArray[ind];
     tempArray[ind].note = note;
-    let newId = uidArray[ind]
+    let newId = uidArray[ind];
     setArray(tempArray);
-    
     return newId;
   };
 
-    const updateOnFirestore = (newId) =>{
+  const updateOnFirestore = async (newId) => {
     var theDoc = db
-      .collection("users")
+      .collection('users')
       .doc(user.uid)
-      .collection("notes")
+      .collection('notes')
       .doc(newId);
-    return theDoc
-      .update({
-        note: note,
-      })
-      .then(function () {
-        console.log("Successfully updated note");
-      })
-      .catch(function (error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-      });
+    try {
+      await theDoc
+        .update({
+          note: note,
+        });
+      console.log('Successfully updated note');
+    } catch (error) {
+      // The document probably doesn't exist.
+      console.error('Error updating document: ', error);
+    }
   };
-  
   const deleteFromFirestore = (newId) => {
     var theDoc = db
-      .collection("users")
+      .collection('users')
       .doc(user.uid)
-      .collection("notes")
+      .collection('notes')
       .doc(newId);
 
     theDoc
       .delete()
       .then(function () {
-        console.log("Document successfully deleted!");
+        console.log('Document successfully deleted!');
       })
       .catch(function (error) {
-        console.error("Error removing document: ", error);
+        console.error('Error removing document: ', error);
       });
   };
 
@@ -82,17 +81,17 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
           multiline={true}
         />
       </View>
-      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
         <TouchableHighlight
           onPress={() => {
             note = textInputValue;
             let newestId = getUid();
             updateOnFirestore(newestId)
-            navigation.navigate("Home2");
+            navigation.navigate('Home2');
           }}
         >
           <View style={{ ...button.button, width: 145, height: 40 }}>
-            <Text style={{ color: "white", fontSize: 13 }}>
+            <Text style={{ color: 'white', fontSize: 13 }}>
               SAVE EDITED NOTE
             </Text>
           </View>
@@ -101,15 +100,15 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
           onPress={() => {
             let newId = getUid();
             deleteFromFirestore(newId);
-            let tempArray = array.filter((note) => note.id != newId);
+            let tempArray = array.filter((post) => post.id !== newId);
             setArray(tempArray);
-            let tempUidArray = uidArray.filter((uidpost) => uidpost != newId);
+            let tempUidArray = uidArray.filter((uidpost) => uidpost !== newId);
             setUidArray(tempUidArray);
-            navigation.navigate("Home2");
+            navigation.navigate('Home2');
           }}
         >
           <View style={{ ...button.button, width: 145, height: 40 }}>
-            <Text style={{ color: "white", fontSize: 13 }}>DELETE NOTE</Text>
+            <Text style={{ color: 'white', fontSize: 13 }}>DELETE NOTE</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -120,31 +119,30 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1.0,
-    width: "100%",
-    backgroundColor: "#3a5f33",
-   
+    width: '100%',
+    backgroundColor: '#3a5f33',
     // alignItems: "center",
   },
   noteContainer: {
-    width: "95%",
+    width: '95%',
     flex: 0.93,
-    borderColor: "#192e19",
+    borderColor: '#192e19',
     borderRadius: 5,
     borderWidth: 4,
-    backgroundColor: "#afc5a0",
+    backgroundColor: '#afc5a0',
     marginStart: 10,
     marginEnd: 10,
     marginTop:10,
-    marginBottom:20
+    marginBottom:20,
   },
 });
 const button = StyleSheet.create({
   button: {
-    backgroundColor: "#302e03",
-    alignItems: "center",
+    backgroundColor: '#302e03',
+    alignItems: 'center',
     borderRadius: 5,
-    borderColor: "black",
+    borderColor: 'black',
     borderWidth: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
 });

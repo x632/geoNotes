@@ -1,8 +1,9 @@
-import { StyleSheet, View } from "react-native";
-import { TheTopPart } from "../components/topPart.js";
-import { MyFlatList } from "../components/flatList.js";
-import React, { useState, createContext, useContext } from "react";
-import { ArrayContext } from "../context/ArrayContext";
+/* eslint-disable prettier/prettier */
+import { StyleSheet, View } from 'react-native';
+import { TheTopPart } from '../components/topPart.js';
+import { MyFlatList } from '../components/flatList.js';
+import React from 'react';
+
 
 export default function Home2() {
 
@@ -17,7 +18,7 @@ export default function Home2() {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1.0,
-    backgroundColor: "#3a5f3a",
-    alignItems: "center",
+    backgroundColor: '#3a5f3a',
+    alignItems: 'center',
   },
 });
