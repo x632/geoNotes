@@ -63,8 +63,8 @@ export default function LogIn() {
       </ImageBackground>
 
       <View style={styles.new}>
-        <View style={{ height: 30 }}>
-          <Text style={{ color: 'red', fontSize: 15 }}> {errorMessage} </Text>
+        <View style={styles.styly1}>
+          <Text style={styles.style2}> {errorMessage} </Text>
         </View>
         <TouchableHighlight onPress={register}>
           <View style={{ ...button.button, width: 200, height: 40 }}>
@@ -126,5 +126,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 400,
     alignItems: 'center',
+  },
+  styly1:{
+    height: 30,
+  },
+  style2:{
+    color: 'red',
+    fontSize: 15,
   },
 });
