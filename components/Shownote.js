@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
 import { db } from '../firebase';
 
-export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
+export function ShowNote({ note, date, time, fontsize, fontcolor }) {
   const navigation = useNavigation();
   const { array, setArray, uidArray, setUidArray } = useContext(
     ArrayContext
@@ -23,7 +23,7 @@ export function ShowNote({ id, title, note, date, time, fontsize, fontcolor }) {
 
   const getUid = () => {
     // get the (firestore)id and add it (also) to note (needed for new notes that haven't
-    // been downloaded from firestore)
+    // been downloaded from firestore yet)
     let ind = array.findIndex(function (post) {
       if (post.time === time && post.date === date) {
         return true;

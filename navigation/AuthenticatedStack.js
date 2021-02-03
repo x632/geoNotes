@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { AddNote } from '../screens/addNote.js';
+import { AddNote } from '../screens/AddNote.js';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home2 from '../screens/Home2.js';
@@ -19,7 +19,7 @@ export default function AuthenticatedStack() {
         }}
       />
       <Stack.Screen
-        name="Add note"
+        name="Addnote"
         component={AddNote}
         options={{
           title: 'Add note',

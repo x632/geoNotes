@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import React,{useContext} from 'react';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import {ArrayContext } from '../context/ArrayContext';
 
 export function ItemComponent({
   id,
@@ -13,6 +14,7 @@ export function ItemComponent({
   fontsize,
 }) {
   const navigation = useNavigation();
+  const {showColor} = useContext(ArrayContext);
 
   let myString = note.substring(0, 40) + '...';
 
@@ -31,42 +33,26 @@ export function ItemComponent({
       }
     >
       <View
-        style={{
-          width: '100%',
-          height: 80,
-          backgroundColor: '#afc5a0',
-          borderColor: 'black',
-        }}
+        style={styles.four}
       >
         <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingLeft: 10,
-            paddingRight: 10,
-            paddingTop: 5,
-          }}
+          style={styles.yetanother}
         >
-          <Text style={{ color: 'black', fontWeight: 'normal', fontSize: 12 }}>
+          <Text style={styles.small}>
             Date: {date}
           </Text>
-          <Text style={{ color: 'black', fontWeight: 'normal', fontSize: 12 }}>
+          <Text style={styles.small}>
             Time: {time}
           </Text>
         </View>
 
         <Text
-          style={{
-            textAlign: 'center',
-            color: 'black',
-            fontWeight: 'normal',
-            fontSize: 18,
-          }}
+          style={styles.another}
         >
           {title}
         </Text>
         <Text
-          style={{ textAlign: 'center', color: 'black', fontWeight: 'normal' }}
+          style={{ textAlign: 'center', color: showColor ? 'black' : fontcolor, fontWeight: 'normal' }}
         >
           {myString}
         </Text>
@@ -74,3 +60,30 @@ export function ItemComponent({
     </TouchableHighlight>
   );
 }
+const styles = StyleSheet.create({
+  small: {
+    color: 'black',
+    fontWeight: 'normal',
+    fontSize: 12,
+  },
+  another:{
+    textAlign: 'center',
+    color: 'black',
+    fontWeight: 'normal',
+    fontSize: 18,
+
+  },
+  yetanother:{
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingTop: 5,
+  },
+  four:{
+      width: '100%',
+      height: 80,
+      backgroundColor: '#afc5a0',
+      borderColor: 'black',
+  },
+});

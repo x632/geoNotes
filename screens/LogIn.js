@@ -18,12 +18,9 @@ export default function LogIn() {
     AuthContext
   );
 
-  /* useEffect(() => {
-      setMessage(errorMessage)
-    }, [errorMessage]); */
+
   const submit = () => {
-    // navigation.navigate('Home');
-    //setIsLoggedIn(true);[}]
+
     if (email === '' || password === '') {
       setErrorMessage('Error: No fields can be empty');
     } else {
@@ -44,7 +41,7 @@ export default function LogIn() {
     <View style={styles.container}>
       <ImageBackground
         source={backgroundPic}
-        style={{ width: "100%", height: 400, alignItems: "center" }}
+        style={ styles.image }
       >
         <View style={{ width: "70%", marginTop: 80 }}>
           <TextInput
@@ -52,14 +49,7 @@ export default function LogIn() {
             value={email}
             keyboardType="email-address"
             onChangeText={setEmail}
-            style={{
-              marginTop: 40,
-              backgroundColor: "#e4ece4",
-              padding: 10,
-              borderRadius: 5,
-              marginBottom: 10,
-              borderWidth: 2,
-            }}
+            style={styles.email}
           />
 
           <TextInput
@@ -67,13 +57,7 @@ export default function LogIn() {
             value={password}
             secureTextEntry={true}
             onChangeText={setPassword}
-            style={{
-              backgroundColor: "#e4ece4",
-              padding: 10,
-              borderRadius: 5,
-              marginTop: 20,
-              borderWidth: 2,
-            }}
+            style={styles.password}
           />
         </View>
       </ImageBackground>
@@ -121,5 +105,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+  },
+  email:{
+    marginTop: 40,
+    backgroundColor: '#e4ece4',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+    borderWidth: 2,
+
+  },
+  password:{
+    backgroundColor: '#e4ece4',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    borderWidth: 2,
+  },
+  image: {
+    width: '100%',
+    height: 400,
+    alignItems: 'center',
   },
 });
