@@ -21,4 +21,4 @@ export function IndividualNote({route}) {
       backgroundColor: '#3a5f33',
       alignItems: 'center',
     },
-})
+});

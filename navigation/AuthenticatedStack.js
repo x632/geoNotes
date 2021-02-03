@@ -19,7 +19,7 @@ export default function AuthenticatedStack() {
         }}
       />
       <Stack.Screen
-        name="Addnote"
+        name="Add note"
         component={AddNote}
         options={{
           title: 'Add note',

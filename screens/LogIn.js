@@ -43,7 +43,7 @@ export default function LogIn() {
         source={backgroundPic}
         style={ styles.image }
       >
-        <View style={{ width: "70%", marginTop: 80 }}>
+        <View style={{ width: '70%', marginTop: 80 }}>
           <TextInput
             placeholder="Enter email"
             value={email}
@@ -64,17 +64,17 @@ export default function LogIn() {
 
       <View style={styles.new}>
         <View style={{ height: 30 }}>
-          <Text style={{ color: "red", fontSize: 15 }}> {errorMessage} </Text>
+          <Text style={{ color: 'red', fontSize: 15 }}> {errorMessage} </Text>
         </View>
         <TouchableHighlight onPress={register}>
           <View style={{ ...button.button, width: 200, height: 40 }}>
-            <Text style={{ color: "white" }}>REGISTER</Text>
+            <Text style={{ color: 'white' }}>REGISTER</Text>
           </View>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={submit}>
           <View style={{ ...button.button, width: 200, height: 40 }}>
-            <Text style={{ color: "white" }}>LOGIN</Text>
+            <Text style={{ color: 'white' }}>LOGIN</Text>
           </View>
         </TouchableHighlight>
       </View>
