@@ -18,9 +18,7 @@ export default function LogIn() {
     AuthContext
   );
 
-
   const submit = () => {
-
     if (email === '' || password === '') {
       setErrorMessage('Error: No fields can be empty');
     } else {
@@ -39,10 +37,7 @@ export default function LogIn() {
   };
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={backgroundPic}
-        style={ styles.image }
-      >
+      <ImageBackground source={backgroundPic} style={styles.image}>
         <View style={{ width: '70%', marginTop: 80 }}>
           <TextInput
             placeholder="Enter email"
@@ -106,16 +101,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
-  email:{
+  email: {
     marginTop: 40,
     backgroundColor: '#e4ece4',
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,
     borderWidth: 2,
-
   },
-  password:{
+  password: {
     backgroundColor: '#e4ece4',
     padding: 10,
     borderRadius: 5,
@@ -127,10 +121,10 @@ const styles = StyleSheet.create({
     height: 400,
     alignItems: 'center',
   },
-  styly1:{
+  styly1: {
     height: 30,
   },
-  style2:{
+  style2: {
     color: 'red',
     fontSize: 15,
   },

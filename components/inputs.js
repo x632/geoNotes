@@ -21,6 +21,7 @@ export function Inputs() {
   const [selectedValue, setSelectedValue] = useState(15);
   const [selectedColor, setSelectedColor] = useState('black');
 
+  //updates created document immediately & changes the note.id to the firestor id
   const addId = (docRef) => {
     var theDoc = db
       .collection('users')
@@ -49,7 +50,7 @@ export function Inputs() {
       <TextInput
         placeholder="Enter Title"
         value={note.title}
-        style={{...toppart.text, fontSize: selectedValue, color: selectedColor, height: 75}}
+        style={{ ...toppart.text, fontSize: 15, color: 'black', height: 75 }}
         onChangeText={(value) => setNote({ ...note, title: value })}
       />
       <TextInput
@@ -57,7 +58,12 @@ export function Inputs() {
         value={note.note}
         multiline
         numberOfLines={4}
-        style={{...toppart.text, fontSize: selectedValue, color: selectedColor, height: 300}}
+        style={{
+          ...toppart.text,
+          fontSize: selectedValue,
+          color: selectedColor,
+          height: 300,
+        }}
         onChangeText={(value) => setNote({ ...note, note: value })}
       />
 
@@ -78,7 +84,7 @@ export function Inputs() {
               ':' +
               today.getSeconds();
             let id = array.length + 1;
-
+            //updates local array
             setArray([
               ...array,
               {
@@ -90,7 +96,6 @@ export function Inputs() {
                 fontsize: selectedValue,
               },
             ]);
-            console.log('här är user uid:', user.uid);
 
             db.collection('users')
               .doc(user.uid)
@@ -105,7 +110,7 @@ export function Inputs() {
                 fontcolor: selectedColor,
               })
               .then(function (docRef) {
-                console.log('Document written with ID: ', docRef.id);
+                //updates note.id on firestore and updates UidArray locally
                 addId(docRef.id);
               })
               .catch(function (error) {
@@ -140,7 +145,7 @@ export function Inputs() {
           <Picker
             selectedValue={selectedColor}
             style={{ color: 'white', height: 30, width: 120 }}
-            onValueChange={(itemValue, itemIndex) => {
+            onValueChange={(itemValue) => {
               setSelectedColor(itemValue);
             }}
           >
@@ -174,7 +179,7 @@ const toppart = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  text:{
+  text: {
     paddingLeft: 10,
     width: '95%',
     backgroundColor: '#afc5a0',

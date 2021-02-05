@@ -20,7 +20,7 @@ export function MyFlatList() {
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           let note = doc.data();
-          idArray.push(doc.id);
+          idArray.push(doc.id); //creating firestore idArray
           let timestamp = note.date;
           let newTime = `${timestamp.toDate()}`;
           let lastTime = newTime.slice(0, 10);
@@ -33,13 +33,11 @@ export function MyFlatList() {
       .catch(function (error) {
         console.log('Error getting documents: ', error);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <View
-      style={styles.part}
-    >
+    <View style={styles.part}>
       <FlatList
         data={array}
         renderItem={({ item }) => (
@@ -55,8 +53,9 @@ export function MyFlatList() {
         )}
         ItemSeparatorComponent={() => {
           return (
-            <View style={{ height: 2, width: '100%', backgroundColor: '#264526' }}>
-              </View>
+            <View
+              style={{ height: 2, width: '100%', backgroundColor: '#264526' }}
+            />
           );
         }}
         keyExtractor={(item) => item.id.toString()}
@@ -74,5 +73,3 @@ const styles = StyleSheet.create({
     borderWidth: 4,
   },
 });
-
-

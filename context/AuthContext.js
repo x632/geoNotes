@@ -10,8 +10,8 @@ export default function AuthContextProvider({ children }) {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-        // eslint-disable-next-line no-shadow
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+    // eslint-disable-next-line no-shadow
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       console.log('user: ', user);
       setUser(user);
       setIsLoading(false);

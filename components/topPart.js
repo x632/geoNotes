@@ -1,13 +1,18 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
-import { StyleSheet, View, TouchableHighlight, Text, Switch } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  Text,
+  Switch,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
-import {ArrayContext } from '../context/ArrayContext';
+import { ArrayContext } from '../context/ArrayContext';
 
 export function TheTopPart() {
-
-  const {showColor, setShowColor} = useContext(ArrayContext);
+  const { showColor, setShowColor } = useContext(ArrayContext);
   const navigation = useNavigation();
   const { signOut } = useContext(AuthContext);
   const submit = () => {
@@ -16,21 +21,18 @@ export function TheTopPart() {
   };
 
   return (
-    <View
-      style={button.else}
-    >
+    <View style={button.else}>
       <View style={toppart.part}>
         <TouchableHighlight onPress={submit}>
           <View style={{ ...button.button, width: 145, height: 45 }}>
             <Text style={{ color: 'white', fontSize: 13 }}>SIGN OUT</Text>
           </View>
         </TouchableHighlight>
-        <Switch style = {{}}
-        value={showColor}
-        onValueChange={(value) => {
-          console.log('value: ', value);
-          setShowColor(value);
-        }}
+        <Switch
+          value={showColor}
+          onValueChange={(value) => {
+            setShowColor(value);
+          }}
         />
         <TouchableHighlight onPress={() => navigation.navigate('Add note')}>
           <View style={{ ...button.button, width: 145, height: 45 }}>
@@ -62,7 +64,7 @@ const button = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
   },
-  else:{
+  else: {
     width: '100%',
     flex: 0.12,
     paddingTop: 13,

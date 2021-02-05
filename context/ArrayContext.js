@@ -10,7 +10,16 @@ export default function ArrayContextProvider({ children }) {
   const [showColor, setShowColor] = useState(false);
   return (
     <ArrayContext.Provider
-      value={{ array, setArray, note, setNote, uidArray, setUidArray, showColor, setShowColor }}
+      value={{
+        array,
+        setArray,
+        note,
+        setNote,
+        uidArray,
+        setUidArray,
+        showColor,
+        setShowColor,
+      }}
     >
       {children}
     </ArrayContext.Provider>

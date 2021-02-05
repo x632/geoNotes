@@ -14,12 +14,9 @@ import { db } from '../firebase';
 
 export function ShowNote({ note, date, time, fontsize, fontcolor }) {
   const navigation = useNavigation();
-  const { array, setArray, uidArray, setUidArray } = useContext(
-    ArrayContext
-  );
+  const { array, setArray, uidArray, setUidArray } = useContext(ArrayContext);
   const { user } = useContext(AuthContext);
   const [textInputValue, setTextInputValue] = useState(note);
-
 
   const getUid = () => {
     // get the (firestore)id and add it (also) to note (needed for new notes that haven't
@@ -29,9 +26,9 @@ export function ShowNote({ note, date, time, fontsize, fontcolor }) {
         return true;
       }
     });
-    let tempArray = [...array];
-    tempArray[ind].id = uidArray[ind];
-    tempArray[ind].note = note;
+    let tempArray = [...array]; //copy
+    tempArray[ind].id = uidArray[ind]; //sets the Id also(in case it's not done - not fetched yet)
+    tempArray[ind].note = note; //also
     let newId = uidArray[ind];
     setArray(tempArray);
     return newId;
@@ -44,10 +41,9 @@ export function ShowNote({ note, date, time, fontsize, fontcolor }) {
       .collection('notes')
       .doc(newId);
     try {
-      await theDoc
-        .update({
-          note: note,
-        });
+      await theDoc.update({
+        note: note,
+      });
       console.log('Successfully updated note');
     } catch (error) {
       // The document probably doesn't exist.
@@ -73,9 +69,9 @@ export function ShowNote({ note, date, time, fontsize, fontcolor }) {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={{...styles.noteContainer}}>
+      <View style={{ ...styles.noteContainer }}>
         <TextInput
-          style={{ fontSize: fontsize, color: fontcolor, padding:10 }}
+          style={{ fontSize: fontsize, color: fontcolor, padding: 10 }}
           onChangeText={(text) => setTextInputValue(text)}
           value={textInputValue}
           multiline={true}
@@ -86,7 +82,7 @@ export function ShowNote({ note, date, time, fontsize, fontcolor }) {
           onPress={() => {
             note = textInputValue;
             let newestId = getUid();
-            updateOnFirestore(newestId)
+            updateOnFirestore(newestId);
             navigation.navigate('Home2');
           }}
         >
@@ -132,8 +128,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#afc5a0',
     marginStart: 10,
     marginEnd: 10,
-    marginTop:10,
-    marginBottom:20,
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 const button = StyleSheet.create({

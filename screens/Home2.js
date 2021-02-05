@@ -4,9 +4,7 @@ import { TheTopPart } from '../components/topPart.js';
 import { MyFlatList } from '../components/flatList.js';
 import React from 'react';
 
-
 export default function Home2() {
-
   return (
     <View style={styles.mainContainer}>
       <TheTopPart />

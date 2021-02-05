@@ -13,13 +13,9 @@ Splash;
 export default function Splash() {
   return (
     <View style={styles.mainContainer}>
-      <ImageBackground
-        source={backgroundPic}
-        style={styles.pic}>
+      <ImageBackground source={backgroundPic} style={styles.pic}>
         <View style={styles.style3}>
-          <Text style={styles.style4}>
-            The great noteapp is loading...
-          </Text>
+          <Text style={styles.style4}>The noteapp is loading...</Text>
         </View>
       </ImageBackground>
       <ActivityIndicator animating={true} />
@@ -34,17 +30,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  pic:{
+  pic: {
     width: '100%',
     height: 400,
     alignItems: 'center',
   },
-  style3:{
+  style3: {
     width: '70%',
     marginTop: 80,
   },
-  style4:{
+  style4: {
     width: '70%',
+    color: 'white',
     marginTop: 80,
   },
 });
